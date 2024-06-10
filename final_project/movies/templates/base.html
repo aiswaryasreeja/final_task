@@ -1,0 +1,37 @@
+<!-- movies/templates/base.html -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Platform</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="{% url 'movies:movie_list' %}">Home</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'movies:add_movie' %}">Add Movie</a></li>
+
+
+                <li><a href="{% url 'movies:movie_list' %}">Movie List</a></li>
+                <li><a href="{% url 'movies:profile' %}">Profile</a></li>
+                <li><a href="{% url 'movies:logout' %}">Logout</a></li>
+            {% else %}
+                <li><a href="{% url 'movies:login' %}">Login</a></li>
+                <li><a href="{% url 'movies:register' %}">Register</a></li>
+
+            {% endif %}
+        </ul>
+    </nav>
+    {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    {% block content %}
+    {% endblock %}
+</body>
+</html>

@@ -1,0 +1,12 @@
+<!-- templates/movies/profile.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Profile</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ user_form.as_p }}
+    {{ profile_form.as_p }}
+    <button type="submit">Update</button>
+</form>
+{% endblock %}
